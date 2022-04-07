@@ -50,25 +50,7 @@ public class OMRC {
     }
     @GetMapping("/gemmeThisSlika/{id}")
     public Jaja print(@PathVariable int id) throws FileNotFoundException, IOException{
-     /*   File files = new File("C:\\Users\\petri\\Desktop\\ovamouda");
-        File[] sveSlike = files.listFiles();
-        File f = sveSlike[id%sveSlike.length];
-
-           // OutputStream outputStream = new FileOutputStream(new File("C:\\Users\\petri\\Desktop\\ovamouda\\"+"Luka"+sveSlike.length+1+".jpg"));
- 
-            long fileSize = f.length();
-            
-            byte[] allBytes = new byte[(int) fileSize];
- 
-            int bytesRead = inputStream.read(allBytes);
-            
-            Jaja jj = new Jaja(allBytes,sveSlike.length);
-            
-            
-         //  outputStream.write(allBytes, 0, bytesRead);
- 
-
-        return jj;*/
+    
      
         File files =new File("C:\\Users\\petri\\Desktop\\reducedimage");
         File[] sveSlike = files.listFiles();
