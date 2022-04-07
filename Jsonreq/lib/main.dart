@@ -24,12 +24,12 @@ class Galerija extends StatefulWidget {
 class GalerijaState extends State<Galerija> {
   DateTime timebackpressed = DateTime.now();
   String data = "";
-  String url2 = "http://192.168.1.2:6969/ovaMouda/folderLen";
+  String url2 = "http://192.168.1.2:6969/serv/folderLen";
   int max = 0;
   List<Image> images = [];
 
   Future<String> getData() async {
-    String url1 = "http://192.168.1.2:6969/ovaMouda/gemmeThisSlika/${counter}";
+    String url1 = "http://192.168.1.2:6969/serv/gemmeThisSlika/${counter}";
     int tmp = 0;
     var res = await http
         .get(Uri.parse(url2), headers: {"Accept": "application/json"});
@@ -131,7 +131,7 @@ class GalerijaState extends State<Galerija> {
   void initState() {
     super.initState();
     this.getData();
-    Timer _everySecond = Timer.periodic(Duration(seconds: 3), (Timer t) {
+    Timer _everySecond = Timer.periodic(Duration(seconds: 1), (Timer t) {
       getData();
     });
   }
