@@ -11,6 +11,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -27,9 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 class Info{
     public byte[] fajl;
     public int mod;
-    public Info(byte[] f, int m){
+    public String time;
+    public Info(byte[] f, int m,String time){
         fajl=f;
         mod = m;
+        this.time=time;
     }
 }
 @RestController
@@ -41,7 +45,7 @@ public class OMRC {
     static int ommm = 0;
       @GetMapping("/folderLen")
     public int notPrint() throws FileNotFoundException, IOException{
-        File veliki = new File("/Users/editor/Desktop/app/tempSingleton.txt");
+        File veliki = new File("C:\\Users\\petri\\Desktop\\tempSingleton.txt");
         FileInputStream fis = new FileInputStream(veliki);
         Scanner citaonica = new Scanner(fis);
         int folderNel = citaonica.nextInt();
@@ -51,6 +55,7 @@ public class OMRC {
     }
     @GetMapping("/gemmeThisSlika/{id}")
     public Info print(@PathVariable int id) throws FileNotFoundException, IOException{
+        //neki stari code idk....
      /*   File files = new File("C:\\Users\\petri\\Desktop\\ovamouda");
         File[] sveSlike = files.listFiles();
         File f = sveSlike[id%sveSlike.length];
@@ -71,22 +76,39 @@ public class OMRC {
 
         return jj;*/
      
-        File files =new File("/Users/editor/Desktop/apk folder");
-        File[] sveSlike = files.listFiles();
+//        File files =new File("/Users/imac/Desktop/apk folder");
+//        File[] sveSlike = files.listFiles();
         //File f = sveSlike[(id+1)%sveSlike.length];
       
-        File pic= new File("/Users/editor/Desktop/apk folder/"+ dnf.format(id)+".jpg");
-     
-     
-     
+        
+       /* 
+        
+        vrijeme na pun sat read integera
+        
+        File time = new File("/Users/imac/Desktop/apk folder txt/"+ dnf.format(id)+".txt");
+        FileInputStream fis = new FileInputStream(time);
+        Scanner citaonica = new Scanner(fis);
+        int timesend = citaonica.nextInt();
+        citaonica.close();
+        fis.close();
+        */
+        
+        FileInputStream fis=new FileInputStream("C:\\Users\\petri\\Desktop\\time\\"+ dnf.format(id)+".txt");       
+        Scanner sc=new Scanner(fis);
+        String timesend =sc.nextLine();
+        sc.close();
+       
+        
+        
+        
+        File pic= new File("C:\\Users\\petri\\Desktop\\apk\\"+ dnf.format(id)+".jpg");
         InputStream inputStream = new FileInputStream(pic);
-        inputStream = new FileInputStream(pic);
         long fileSize = pic.length(); 
         byte[] allBytes = new byte[(int) fileSize];
         int bytesRead = inputStream.read(allBytes);
-        Info jj = new Info(allBytes,notPrint() );
+        Info jj = new Info(allBytes,id,timesend);
             
-         inputStream.close();
+        inputStream.close();
 
         
         return jj;
